@@ -1,0 +1,19 @@
+<mat-drawer-container #drawer class="col-12 h-100 navbar text-white px-0 py-3">
+    <div class="p-3 d-flex justify-content-center">
+        <h2>My App</h2>
+    </div>
+    <div class="my-3">
+        <button mat-button color="warn" type="button" class="py-2 btn-lg btn-block bg-white border-primary dashboard-btn text-white rounded-0 d-flex align-items-center justify-content-center"><mat-icon class="mx-2">dashboard</mat-icon><span class="mx-2">Dashboard</span></button>
+    </div>
+    <mat-list class="my-4 nav-list">
+        <mat-list-item>
+            <button mat-flat-button class="nav-link d-flex align-items-center" routerLink="/list" routerLinkActive="active-link"><mat-icon class="mx-2">list</mat-icon>Companies List</button> 
+        </mat-list-item>
+        <mat-list-item> 
+            <button mat-flat-button class="nav-link d-flex align-items-center" routerLink="/form" routerLinkActive="active-link"><mat-icon class="mx-2">playlist_add</mat-icon>Company Form</button> 
+        </mat-list-item>
+    </mat-list>
+    
+</mat-drawer-container>
+
+  

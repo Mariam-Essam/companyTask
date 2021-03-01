@@ -1,0 +1,147 @@
+<div class="container">
+    <div class="row my-5">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-center align-items-center">
+                <h2 class="font-weight-bold primary-color">Enter Company Information</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="my-4">
+                <h3 class="font-weight-bold second-color">Company Basic Information: </h3>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <mat-form-field class="w-100 my-2" appearance="fill">
+                <mat-label>Enter company name</mat-label>
+                <input name="companyName" matInput maxlength="50" placeholder="Ex. Nougat" required [formControl]='companyName'>
+                <mat-hint align="end">{{companyName.value?.length || 0}}/50</mat-hint>
+                <mat-error *ngIf='companyName.invalid'>{{getNameErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field class="w-100 my-2" appearance="fill">
+                <mat-label>Enter company address</mat-label>
+                <input name="companyAddress" matInput placeholder="Ex. nasr city st." >
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <mat-form-field class='w-100 my-2' appearance="fill">
+                <mat-label>Enter email</mat-label>
+                <input name="email" matInput maxlength="100" placeholder="pat@example.com" [formControl]="email" required>
+                <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field class='w-100 my-2' appearance="fill">
+                <mat-label>Enter phone number</mat-label>
+                <input name="phone" matInput maxlength="15" placeholder="01123456789" [formControl]="phone" required>
+                <mat-hint align="end">{{phone.value?.length || 0}}/15</mat-hint>
+                <mat-error *ngIf="email.invalid">{{getPhoneErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="my-4">
+                <h3 class="font-weight-bold second-color">Employees Information: </h3>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <mat-form-field class="w-100 my-2" appearance="fill">
+                <mat-label>Enter Employee name</mat-label>
+                <input name="empName0" matInput maxlength="25" placeholder="Ex. Mohammed" required [formControl]='Employees[0].empName'>
+                <mat-hint align="end">{{Employees[0].empName.value?.length || 0}}/25</mat-hint>
+                <mat-error *ngIf='Employees[0].empName.invalid'>{{getEmpNameErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+              <mat-form-field class="w-100 my-2" appearance="fill">
+                <mat-label>Designation</mat-label>
+                <mat-select [formControl]="Employees[0].designation" name="designation0">
+                  <mat-option *ngFor="let designation of designationList" [value]="designation">
+                    {{designation}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <mat-form-field class=" w-100 my-2" appearance="fill">
+                <mat-label>Join date</mat-label>
+                <input matInput [formControl]="Employees[0].joinDate" name="joinDate0"[min]="minDate" [max]="maxDate" [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field class='w-100 my-2' appearance="fill">
+                <mat-label>Enter email</mat-label>
+                <input [formControl]="Employees[0].email" name="email0" matInput maxlength="100" placeholder="pat@example.com" required>
+                <mat-error *ngIf="email.invalid">{{getEmpEmailErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <mat-form-field class='w-100 my-2' appearance="fill">
+                <mat-label>Enter phone number</mat-label>
+                <input name="phone0" matInput maxlength="15" placeholder="01123456789" [formControl]="Employees[0].phone" required>
+                <mat-hint align="end">{{Employees[0].phone.value?.length || 0}}/15</mat-hint>
+                <mat-error *ngIf="email.invalid">{{getEmpPhoneErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field class="w-100 my-2" appearance="fill">
+                <mat-label>Skills</mat-label>
+                <mat-select [formControl]="newSkills" multiple>
+                    <mat-select-trigger>
+                    {{newSkills.value ? newSkills.value[0] : ''}}
+                    <span *ngIf="newSkills.value?.length > 1">
+                        (+{{newSkills.value.length - 1}} {{newSkills.value?.length === 2 ? 'other' : 'others'}})
+                    </span>
+                    </mat-select-trigger>
+                    <mat-option *ngFor="let skill of skillsList" [value]="skill">{{skill}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="newSkills.invalid">{{getEmpSkillsErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <!-- <div class="col-md-3">
+                <button class="w-100 my-2"mat-raised-button color="primary" (click)=`addSkills()`>Primary</button>
+            </div> -->
+        </div>
+    </div>
+    <div *ngIf="newSkills.value.length" class="my-2">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="font-weight-bold text-primary">Skills</h3>
+            </div>
+            <div class="col-sm-12 my-2">
+                Enter Rate from 1 to 5 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3"*ngFor = "let skill of newSkills.value">
+                <div class="col-sm-2">
+                    <div class="my-3">
+                        {{skill}}:
+                    </div>
+                </div>
+                <div class="col-ms-9">
+                    <mat-form-field class='my-2 mx-2' appearance="fill">
+                        <mat-label>Rate</mat-label>
+                        <input [formControl]="ratingNum" matInput maxlength="1" min="1" max=5 id='rate${i}' placeholder="1" required [formControl]="ratingNum">
+                        <mat-error *ngIf="ratingNum.invalid">{{getEmpSkillRateErrorMessage(skill)}}</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
