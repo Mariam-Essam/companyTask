@@ -5,3 +5,14 @@
 .second-color{
     color: $second-color!important;
 }
+.bg-second{
+    background-color: $second-color!important;
+    color: white!important;
+}
+.bigger-font{
+    font-size: 1.3em;
+}
+.primary-bg{
+    background-color: $primary-color!important;
+    border: none;
+}
