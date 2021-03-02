@@ -79,14 +79,9 @@ export class FormPageComponent implements OnInit {
     }
     return this.empNum.hasError('pattern') ? 'You must enter a number' : '';
   }
-  Employees = [];
-  count = [];
-  createEmp(){
-    if(this.empNum.value){
-      for(let i = 0; i < this.empNum.value; i++){
-        this.count.push(i)
-        let newEmp = {
-          empName:new FormControl('', [Validators.required]),
+  Employees = [
+    {
+      empName:new FormControl('', [Validators.required]),
           designation:new FormControl(),
           joinDate:new FormControl(),
           email:new FormControl('', [Validators.required, Validators.email]),
@@ -123,11 +118,53 @@ export class FormPageComponent implements OnInit {
               completedYear:new FormControl(moment()),
               educationNo: 0
             }
-          ], 
-        }
-        this.Employees.push(newEmp);
-      }
+          ],
+          empNum:0
     }
+  ];
+  addEmployee(){
+    let count = this.Employees.length;
+    this.Employees.push({
+      empName:new FormControl('', [Validators.required]),
+          designation:new FormControl(),
+          joinDate:new FormControl(),
+          email:new FormControl('', [Validators.required, Validators.email]),
+          phone: new FormControl('', [Validators.required]), 
+          skills:new FormControl('', [Validators.required]),
+          rating:{
+            Java:new FormControl('', [Validators.required, Validators.min(1), Validators.max(5)]),
+            Angular:new FormControl('', [Validators.required, Validators.min(1), Validators.max(5)]),
+            CSS:new FormControl('', [Validators.required, Validators.min(1), Validators.max(5)]),
+            HTML:new FormControl('', [Validators.required, Validators.min(1), Validators.max(5)]),
+            JavaScript:new FormControl('', [Validators.required, Validators.min(1), Validators.max(5)]),
+            UI:new FormControl('', [Validators.required, Validators.min(1), Validators.max(5)]),
+            SQL:new FormControl('', [Validators.required, Validators.min(1), Validators.max(5)]),
+            React:new FormControl('', [Validators.required, Validators.min(1), Validators.max(5)]),
+            PHP:new FormControl('', [Validators.required, Validators.min(1), Validators.max(5)]),
+            GIT:new FormControl('', [Validators.required, Validators.min(1), Validators.max(5)]),
+            AWS:new FormControl('', [Validators.required, Validators.min(1), Validators.max(5)]),
+            Python:new FormControl('', [Validators.required, Validators.min(1), Validators.max(5)]),
+            C:new FormControl('', [Validators.required, Validators.min(1), Validators.max(5)]),
+            'C++':new FormControl('', [Validators.required, Validators.min(1), Validators.max(5)]),
+            'C#':new FormControl('', [Validators.required, Validators.min(1), Validators.max(5)]),
+            Unity:new FormControl('', [Validators.required, Validators.min(1), Validators.max(5)]),
+            R:new FormControl('', [Validators.required, Validators.min(1), Validators.max(5)]),
+            AI:new FormControl('', [Validators.required, Validators.min(1), Validators.max(5)]),
+            NLP:new FormControl('', [Validators.required, Validators.min(1), Validators.max(5)]),
+            Photoshop:new FormControl('', [Validators.required, Validators.min(1), Validators.max(5)]),
+            Nodejs:new FormControl('', [Validators.required, Validators.min(1), Validators.max(5)]),
+          },
+          skillsRating: [],
+          educationInfo:[
+            {
+              instituteName:new FormControl('', [Validators.required]),
+              courseName:new FormControl('', [Validators.required]), 
+              completedYear:new FormControl(moment()),
+              educationNo: 0
+            }
+          ],
+          empNum:count
+    })
   }
   addEducation(i){
     let count = this.Employees[i].educationInfo.length; 

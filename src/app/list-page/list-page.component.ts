@@ -157,7 +157,42 @@ export class ListPageComponent implements AfterViewInit  {
       }
     })
   }
-  
+  async handleEdit(elem){
+    const { value: formValues } = await Swal.fire({
+      title: 'Multiple inputs',
+      html:
+        `<input id="swal-input1" class="swal2-input" value = ${elem.companyName}>
+        <input id="swal-input2" class="swal2-input" value = ${elem.companyAddress}>
+        <input id="swal-input3" class="swal2-input" value = ${elem.phone}>
+        <input id="swal-input4" class="swal2-input" value = ${elem.email}>
+        `,
+      focusConfirm: false,
+      preConfirm: () => {
+        let compName =  <HTMLInputElement>document.getElementById('swal-input1');
+        let address = <HTMLInputElement>document.getElementById('swal-input2');
+        let phone = <HTMLInputElement>document.getElementById('swal-input3');
+        let email = <HTMLInputElement>document.getElementById('swal-input4');
+        let newData = [];
+        for(let i = 0; i < ELEMENT_DATA.length; i++){
+          if(ELEMENT_DATA[i].companyName === elem.companyName){
+            newData.push({
+              companyName: compName.value,
+              companyAddress: address.value,
+              phone: phone.value,
+              email: email.value,
+              createdAt: ELEMENT_DATA[i].createdAt
+            });
+          }
+          else{
+            newData.push(ELEMENT_DATA[i]);
+          }
+        }
+        ELEMENT_DATA = newData;
+        this.dataSource.data = ELEMENT_DATA;
+        Swal.fire('Updated!', '', 'success')
+      }
+    })
+  }
 }
 export interface PeriodicElement {
   companyName: string;
