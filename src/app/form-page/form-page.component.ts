@@ -166,6 +166,18 @@ export class FormPageComponent implements OnInit {
           empNum:count
     })
   }
+  deleteEmployee(i){
+    let newData = [];
+    let count = 0;
+    for(let j=0;j< this.Employees.length;j++){
+      if(j==i){
+        continue;
+      }
+      newData.push({...this.Employees[j], empNum: count})
+      count++;
+    }
+    this.Employees = newData;
+  }
   addEducation(i){
     let count = this.Employees[i].educationInfo.length; 
     this.Employees[i].educationInfo.push({
