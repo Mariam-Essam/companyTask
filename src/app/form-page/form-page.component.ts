@@ -187,6 +187,18 @@ export class FormPageComponent implements OnInit {
       educationNo: count
     })
   }
+  deleteEducation(i, k){
+    let newData = [];
+    let count = 0;
+    for(let j=0;j< this.Employees[i].educationInfo.length;j++){
+      if(j==k){
+        continue;
+      }
+      newData.push({...this.Employees[i].educationInfo[j], empNum: count})
+      count++;
+    }
+    this.Employees[i].educationInfo = newData;
+  }
   chosenYearHandler(normalizedYear: Moment, i, num) {
     const ctrlValue = this.Employees[i].educationInfo[num].completedYear.value;
     ctrlValue.year(normalizedYear.year());
